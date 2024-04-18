@@ -1,0 +1,75 @@
+<div class="login-wrapper">
+    <div *ngIf="!isCofirmOTP" class="form-login-wrapper">
+        <div class="header-form d-flex justify-content-between">
+            <div class="form-logo">
+                <img src="../../assets/image/Logo.svg" alt="">
+            </div>
+            <div class="form-language">
+                <img src="../../assets/image/Language.svg" alt="">
+                <span>Tiếng Việt</span>
+            </div>
+        </div>
+        <div class="login-form">
+            <form class="row g-3 needs-validation" [formGroup]="userForm">
+                <div class="">
+                    <label class="form-label">Email/Mã nhân viên</label>
+                    <input autofocus type="text" class="form-control" formControlName="email">
+                    <div class="text-danger" *ngIf="userForm.controls['email'].invalid && (isFormSubmitted || userForm.controls['email'].touched || userForm.controls['email'].dirty)">
+                        <span *ngIf="userForm.controls['email'].errors?.['required']"> This IS Required </span>
+            <span *ngIf="userForm.controls['email'].errors?.['email']"> Email Is Not Proper </span>
+                    </div>
+                </div>
+                <div class="">
+                    <label class="form-label">Mật khẩu</label>
+                    <input type="text" class="form-control"  formControlName="password">
+                    <div class="text-danger" *ngIf="userForm.controls['password'].invalid   && (userForm.controls['password'].touched || userForm.controls['password'].dirty)">
+                        <span *ngIf="userForm.controls['password'].errors?.['required']"> This IS Required </span>
+                    </div>
+                </div>
+                <div class="col-12 sumit-login d-flex align-items-center justify-content-center">
+                    <button class="btn btn-primary d-flex align-items-center" type="button" (click)="onSubmit()">
+                        <img class="me-2" src="../../assets/image/Icon Left.svg" alt="" srcset="">
+                        <span>Đăng nhập</span>
+                    </button>
+                </div>
+               
+            </form>
+              
+        </div>
+        <div class="dowload-app">
+            <div class="dowload-app-header mb-4">
+                <p style="color: #78829D;" class="text-center ">Tải ứng dụng di động</p>
+            </div>
+            <div class="dowload-app-content d-flex justify-content-center  ">
+                <img src="../../assets/image/appstore.png" alt="">
+                <img src="../../assets/image/chplay.png " alt="">
+            </div>
+        </div>
+        <div class="develop-by d-flex align-items-center justify-content-center">
+            <img class="me-2" src="../../assets/image/coppy-right.svg" alt="">
+            <span class="me-2">Developed by</span>
+            <img src="../../assets/image/viettel.png" alt="">
+
+        </div>
+    </div>
+    <div *ngIf="isCofirmOTP" class="form-login-otp">
+        <div class="otp-header">
+            <div class="opt-avatar  d-flex flex-wrap justify-content-center">
+                <img src="../../assets/image/Ava.png" alt="">
+            </div>
+            <div class="otp-username text-center mt-3">NamCT</div>
+        </div>
+        <div class="otp-field mb-4">
+            <input type="number" [(ngModel)]="otpInputs[0]" (paste)="onPaste($event, 0)" (keyup)="onKeyUp($event, 0)" />
+            <input type="number" [(ngModel)]="otpInputs[1]" [disabled]="!otpInputs[0]" (keyup)="onKeyUp($event, 1)" />
+            <input type="number" [(ngModel)]="otpInputs[2]" [disabled]="!otpInputs[1]" (keyup)="onKeyUp($event, 2)" />
+            <input type="number" [(ngModel)]="otpInputs[3]" [disabled]="!otpInputs[2]" (keyup)="onKeyUp($event, 3)" />
+            <input type="number" [(ngModel)]="otpInputs[4]" [disabled]="!otpInputs[3]" (keyup)="onKeyUp($event, 4)" />
+            <input type="number" [(ngModel)]="otpInputs[5]" [disabled]="!otpInputs[4]" (keyup)="onKeyUp($event, 5)" />
+          </div>
+
+          <button class="btn btn-primary mb-3" [disabled]="!isCodeEntered" (click)="verifyCode()">
+            Verify
+          </button>
+    </div>
+</div>
